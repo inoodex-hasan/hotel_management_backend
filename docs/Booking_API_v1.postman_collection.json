@@ -1,0 +1,363 @@
+{
+	"info": {
+		"_postman_id": "8312f701-0e42-4313-96da-1edec3f222d9",
+		"name": "Booking System API (v1)",
+		"description": "RESTful API collection for Laravel backend & Next.js frontend integration.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8000",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "1. Settings & Amenities",
+			"item": [
+				{
+					"name": "Get App Settings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/settings",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "settings"]
+						}
+					}
+				},
+				{
+					"name": "Get Filter Amenities",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/amenities",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "amenities"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "2. Hotels & Search",
+			"item": [
+				{
+					"name": "Get All Hotels (Paginated)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/hotels?page=1&per_page=12&sort=popularity",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "hotels"],
+							"query": [
+								{ "key": "page", "value": "1" },
+								{ "key": "per_page", "value": "12" },
+								{ "key": "sort", "value": "popularity" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Featured Hotels (Home)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/hotels/featured?limit=6",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "hotels", "featured"],
+							"query": [
+								{ "key": "limit", "value": "6" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Search Hotels (With Filters)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/hotels/search?location=Dhaka&check_in=2026-09-01&check_out=2026-09-03&rooms=1&guests=2&price_range=0-5000,5001-10000&rating=4,5&sort=popularity",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "hotels", "search"],
+							"query": [
+								{ "key": "location", "value": "Dhaka" },
+								{ "key": "check_in", "value": "2026-09-01" },
+								{ "key": "check_out", "value": "2026-09-03" },
+								{ "key": "rooms", "value": "1" },
+								{ "key": "guests", "value": "2" },
+								{ "key": "price_range", "value": "0-5000,5001-10000" },
+								{ "key": "rating", "value": "4,5" },
+								{ "key": "sort", "value": "popularity" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Autocomplete Suggestions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/hotels/suggestions?q=hotel",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "hotels", "suggestions"],
+							"query": [
+								{ "key": "q", "value": "hotel" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Single Hotel by Slug",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/hotels/radisson-blu-water-garden",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "hotels", "radisson-blu-water-garden"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "3. Destinations",
+			"item": [
+				{
+					"name": "Get All Destinations (Cities)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/destinations",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "destinations"]
+						}
+					}
+				},
+				{
+					"name": "Get Popular Destinations",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/destinations/popular",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "destinations", "popular"]
+						}
+					}
+				},
+				{
+					"name": "Get Destination with Hotels",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/destinations/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "destinations", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "4. Reservations & Bookings",
+			"item": [
+				{
+					"name": "Get All Bookings (Paginated)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/bookings?page=1&per_page=15&status=pending",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "bookings"],
+							"query": [
+								{ "key": "page", "value": "1" },
+								{ "key": "per_page", "value": "15" },
+								{ "key": "status", "value": "pending" },
+								{ "key": "search", "value": "" }
+							]
+						}
+					}
+				},
+				{
+					"name": "Submit Standard Booking",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Accept", "value": "application/json" },
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"hotel_id\": 1,\n  \"room_type_id\": 1,\n  \"check_in\": \"2026-09-10\",\n  \"check_out\": \"2026-09-12\",\n  \"rooms_count\": 1,\n  \"adult_guests\": 2,\n  \"child_guests\": 1,\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"phone\": \"+8801700112233\",\n  \"gender\": \"male\",\n  \"nationality\": \"Bangladeshi\",\n  \"notes\": \"High floor if possible.\",\n  \"passengers\": {\n    \"adult\": [\n      { \"first_name\": \"Jane\", \"last_name\": \"Doe\" }\n    ],\n    \"child\": [\n      { \"first_name\": \"Timmy\", \"last_name\": \"Doe\" }\n    ]\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/bookings",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "bookings"]
+						}
+					}
+				},
+				{
+					"name": "Submit Quick Booking",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Accept", "value": "application/json" },
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"hotel_id\": 1,\n  \"room_type_id\": 1,\n  \"check_in\": \"2026-09-10\",\n  \"check_out\": \"2026-09-12\",\n  \"rooms_count\": 1,\n  \"adult_guests\": 2,\n  \"full_name\": \"Alice Walker\",\n  \"email\": \"alice.walker@example.com\",\n  \"phone\": \"+8801811223344\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/bookings/quick",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "bookings", "quick"]
+						}
+					}
+				},
+				{
+					"name": "Get Booking by Reference",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/bookings/BK-20260001",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "bookings", "BK-20260001"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "5. Authentication (Sanctum)",
+			"item": [
+				{
+					"name": "Register Customer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Accept", "value": "application/json" },
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Jane Doe\",\n  \"email\": \"jane.doe@example.com\",\n  \"phone\": \"+8801711223344\",\n  \"password\": \"password123\",\n  \"password_confirmation\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/auth/register",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "auth", "register"]
+						}
+					}
+				},
+				{
+					"name": "Login Customer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Accept", "value": "application/json" },
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"jane.doe@example.com\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "auth", "login"]
+						}
+					}
+				},
+				{
+					"name": "Get Current User Profile (Protected)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" },
+							{ "key": "Authorization", "value": "Bearer {{token}}" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/auth/user",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "auth", "user"]
+						}
+					}
+				},
+				{
+					"name": "Get User Bookings History (Protected)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" },
+							{ "key": "Authorization", "value": "Bearer {{token}}" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/auth/bookings",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "auth", "bookings"]
+						}
+					}
+				},
+				{
+					"name": "Logout (Protected)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Accept", "value": "application/json" },
+							{ "key": "Authorization", "value": "Bearer {{token}}" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/auth/logout",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "auth", "logout"]
+						}
+					}
+				}
+			]
+		}
+	]
+}
