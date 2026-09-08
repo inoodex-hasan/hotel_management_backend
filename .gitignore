@@ -1,0 +1,82 @@
+# ============================================================
+# Laravel .gitignore — Production & Development Ready
+# ============================================================
+
+# Dependencies
+/vendor/
+/node_modules/
+
+# Environment & Sensitive Configs
+.env
+.env.backup
+.env.production
+.env.local
+.env.*.local
+Homestead.json
+Homestead.yaml
+auth.json
+
+# Storage & Framework Cache
+/storage/*.key
+/storage/app/*
+!/storage/app/.gitignore
+!/storage/app/public/.gitignore
+/storage/framework/cache/*
+!/storage/framework/cache/.gitignore
+!/storage/framework/cache/data/.gitignore
+/storage/framework/sessions/*
+!/storage/framework/sessions/.gitignore
+/storage/framework/testing/*
+!/storage/framework/testing/.gitignore
+/storage/framework/views/*
+!/storage/framework/views/.gitignore
+/storage/logs/*
+!/storage/logs/.gitignore
+!/storage/logs/.gitkeep
+
+# Build Artifacts
+/public/build/
+/public/hot
+/public/storage
+
+# Logs & Debugging
+*.log
+npm-debug.log
+yarn-error.log
+php_error.log
+/storage/logs/*.log
+
+# Testing & Analysis Cache
+.phpunit.result.cache
+.phpunit.cache/
+.php-cs-fixer.cache
+*.phar
+
+# IDE & OS Specific Files
+.agents/
+.idea/
+.vscode/
+.fleet/
+.nova/
+.zed/
+.phpintel/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db
+desktop.ini
+*.code-workspace
+
+# Database Files & Dumps
+*.sql
+*.sqlite
+*.sqlite-journal
+*.sqlite-shm
+*.sqlite-wal
+/database/*.sqlite
+/database/*.sqlite-journal
+/database/*.sqlite-shm
+/database/*.sqlite-wal
