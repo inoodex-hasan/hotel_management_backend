@@ -19,6 +19,11 @@ class SettingController extends Controller
         $appLogo = get_setting('app_logo');
         $appFavicon = get_setting('app_favicon');
 
+        $expImage = $settings['experience_image'] ?? '/images/room2.avif';
+        if ($expImage && (str_starts_with($expImage, '/storage/') || str_starts_with($expImage, 'storage/'))) {
+            $expImage = url(ltrim($expImage, '/'));
+        }
+
         $data = [
             'app_name' => $settings['app_name'] ?? 'The Azura Hotel & Suites',
             'hotel_tagline' => $settings['hotel_tagline'] ?? 'A place where thoughtful design, genuine hospitality and unforgettable experiences come together.',
@@ -31,6 +36,15 @@ class SettingController extends Controller
             'instagram_url' => $settings['instagram_url'] ?? 'https://instagram.com',
             'twitter_url' => $settings['twitter_url'] ?? 'https://twitter.com',
             'youtube_url' => $settings['youtube_url'] ?? 'https://youtube.com',
+
+            // Experience Banner
+            'experience_label' => $settings['experience_label'] ?? 'The Azura Experience',
+            'experience_title' => $settings['experience_title'] ?? 'Where every stay becomes a memory.',
+            'experience_subtitle' => $settings['experience_subtitle'] ?? 'Immerse yourself in panoramic coastal luxury, exceptional gastronomy, and refined seaside serenity.',
+            'experience_image' => $expImage,
+            'experience_video_url' => $settings['experience_video_url'] ?? null,
+            'experience_button_text' => $settings['experience_button_text'] ?? 'Explore Suites',
+            'experience_button_link' => $settings['experience_button_link'] ?? '/rooms',
         ];
 
         return response()->json([

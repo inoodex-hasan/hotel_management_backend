@@ -10,7 +10,7 @@
             <li class="before:content-['/'] ltr:before:mr-2 rtl:before:ml-2"><span>Settings</span></li>
         </ul>
         <h2 class="text-xl font-semibold uppercase">Hotel & General Settings</h2>
-        <p class="text-xs text-slate-400 mt-1">Configure hotel name, contact details, address, social channels, and brand assets</p>
+        <p class="text-xs text-slate-400 mt-1">Configure hotel name, contact details, address, social channels, experience banner, and brand assets</p>
     </div>
 </div>
 
@@ -24,7 +24,7 @@
     @csrf
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- LEFT 2 COLS: General & Contact Info -->
+        <!-- LEFT 2 COLS: General, Experience & Contact Info -->
         <div class="lg:col-span-2 space-y-6">
             <!-- Brand & Identity -->
             <div class="panel">
@@ -49,6 +49,99 @@
                         <input id="hotel_tagline" type="text" name="hotel_tagline"
                             value="{{ old('hotel_tagline', $settings['hotel_tagline'] ?? 'A place where thoughtful design, genuine hospitality and unforgettable experiences come together.') }}"
                             class="form-input text-sm" placeholder="Short tagline shown in footer & metadata" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience Spotlight Banner -->
+            <div class="panel">
+                <h5 class="text-md font-bold uppercase tracking-wider text-slate-700 dark:text-white mb-5 pb-3 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                    <span>Homepage Experience Spotlight Banner</span>
+                    <span class="badge bg-primary/10 text-primary text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded">Visual Banner</span>
+                </h5>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="experience_label" class="text-xs font-bold uppercase text-slate-600 dark:text-slate-300">
+                            Banner Eyebrow Label
+                        </label>
+                        <input id="experience_label" type="text" name="experience_label"
+                            value="{{ old('experience_label', $settings['experience_label'] ?? 'The Azura Experience') }}"
+                            class="form-input text-sm" placeholder="e.g. The Azura Experience" />
+                    </div>
+
+                    <div>
+                        <label for="experience_button_text" class="text-xs font-bold uppercase text-slate-600 dark:text-slate-300">
+                            CTA Button Text
+                        </label>
+                        <input id="experience_button_text" type="text" name="experience_button_text"
+                            value="{{ old('experience_button_text', $settings['experience_button_text'] ?? 'Explore Suites') }}"
+                            class="form-input text-sm" placeholder="e.g. Explore Suites / Book Your Stay" />
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label for="experience_title" class="text-xs font-bold uppercase text-slate-600 dark:text-slate-300">
+                            Spotlight Main Title
+                        </label>
+                        <input id="experience_title" type="text" name="experience_title"
+                            value="{{ old('experience_title', $settings['experience_title'] ?? 'Where every stay becomes a memory.') }}"
+                            class="form-input text-sm" placeholder="e.g. Where every stay becomes a memory." />
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label for="experience_subtitle" class="text-xs font-bold uppercase text-slate-600 dark:text-slate-300">
+                            Spotlight Subtitle / Description
+                        </label>
+                        <textarea id="experience_subtitle" name="experience_subtitle" rows="2" class="form-input text-sm"
+                            placeholder="Immerse yourself in panoramic coastal luxury...">{{ old('experience_subtitle', $settings['experience_subtitle'] ?? 'Immerse yourself in panoramic coastal luxury, exceptional gastronomy, and refined seaside serenity.') }}</textarea>
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label for="experience_button_link" class="text-xs font-bold uppercase text-slate-600 dark:text-slate-300">
+                            CTA Button Destination Link
+                        </label>
+                        <input id="experience_button_link" type="text" name="experience_button_link"
+                            value="{{ old('experience_button_link', $settings['experience_button_link'] ?? '/rooms') }}"
+                            class="form-input text-sm" placeholder="/rooms or /booking" />
+                    </div>
+
+                    <!-- Experience Image Upload & Direct URL -->
+                    <div class="md:col-span-2 pt-3 border-t border-slate-100 dark:border-slate-800">
+                        <label class="text-xs font-bold uppercase text-slate-600 dark:text-slate-300 block mb-2">
+                            Background Image / Wallpaper
+                        </label>
+                        
+                        @php
+                            $expImg = $settings['experience_image'] ?? '/images/room2.avif';
+                            if ($expImg && (str_starts_with($expImg, '/storage/') || str_starts_with($expImg, 'storage/'))) {
+                                $expImg = url(ltrim($expImg, '/'));
+                            }
+                        @endphp
+
+                        @if($expImg)
+                            <div class="mb-3 relative w-full h-36 rounded-xl overflow-hidden border border-slate-200 bg-slate-900 shadow-sm">
+                                <img src="{{ $expImg }}" alt="Experience Banner" class="w-full h-full object-cover" />
+                            </div>
+                        @endif
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div>
+                                <label for="experience_image_file" class="text-[11px] font-semibold uppercase text-slate-500 block mb-1">
+                                    Upload New Photo (WebP auto-optimized)
+                                </label>
+                                <input id="experience_image_file" type="file" name="experience_image_file" accept="image/*"
+                                    class="form-input file:py-1 file:px-2.5 file:border-0 file:text-xs file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 text-xs" />
+                            </div>
+
+                            <div>
+                                <label for="experience_image" class="text-[11px] font-semibold uppercase text-slate-500 block mb-1">
+                                    Or Direct Image URL / Path
+                                </label>
+                                <input id="experience_image" type="text" name="experience_image"
+                                    value="{{ old('experience_image', $settings['experience_image'] ?? '/images/room2.avif') }}"
+                                    class="form-input text-xs" placeholder="/images/room2.avif" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -177,7 +270,7 @@
                     Save Changes
                 </h5>
                 <p class="text-xs text-slate-400 mb-4">
-                    Updates to hotel contact and social info are instantly reflected on the website header, footer, and contact page.
+                    Updates are instantly applied across the website header, footer, experience banner, and contact pages.
                 </p>
                 <button type="submit" class="btn btn-primary w-full">
                     Save Settings

@@ -8,7 +8,7 @@
                         src="{{ get_setting('app_logo') ? asset('storage/' . get_setting('app_logo')) : asset('assets/images/logo.svg') }}"
                         alt="logo" />
                     <span
-                        class="hidden align-middle text-2xl font-semibold transition-all duration-300 ltr:ml-1.5 rtl:mr-1.5 dark:text-white-light md:inline">{{ auth()->user()->name }}</span>
+                        class="hidden align-middle text-2xl font-semibold transition-all duration-300 ltr:ml-1.5 rtl:mr-1.5 dark:text-white-light md:inline">{{ auth()->user()?->name ?? 'Admin' }}</span>
                 </a>
 
                 <a href="javascript:;"
@@ -21,22 +21,6 @@
                         <path d="M20 17L4 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                     </svg>
                 </a>
-            </div>
-
-            <div class="hidden ltr:mr-2 rtl:ml-2 sm:block">
-                <ul class="flex items-center space-x-2 rtl:space-x-reverse dark:text-[#d0d2d6]">
-                    <li>
-                        <a href="javascript:;"
-                            class="collapse-icon flex items-center rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60"
-                            @click="$store.app.toggleSidebar()" title="Toggle Sidebar">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20 7L4 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                                <path opacity="0.5" d="M20 12L4 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                                <path d="M20 17L4 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                            </svg>
-                        </a>
-                    </li>
-                </ul>
             </div>
 
             <div

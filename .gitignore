@@ -69,6 +69,7 @@ php_error.log
 Thumbs.db
 desktop.ini
 *.code-workspace
+*.md
 
 # Database Files & Dumps
 *.sql

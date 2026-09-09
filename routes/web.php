@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\AboutContentController;
 use App\Http\Controllers\Admin\DiningController;
 use App\Http\Controllers\Admin\FacilityController;
 use App\Http\Controllers\Admin\GalleryController;
+use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\RoleController as LocalRoleController;
 
 Route::get('/', function () {
@@ -42,6 +43,8 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('facilities/{facility}/toggle', [FacilityController::class, 'toggleStatus'])->name('facilities.toggle');
         Route::resource('gallery', GalleryController::class);
         Route::patch('gallery/{gallery}/toggle', [GalleryController::class, 'toggleStatus'])->name('gallery.toggle');
+        Route::resource('testimonials', TestimonialController::class);
+        Route::patch('testimonials/{testimonial}/toggle', [TestimonialController::class, 'toggleApproval'])->name('testimonials.toggle');
         Route::resource('hotels', HotelController::class);
         Route::resource('hotels.room-types', HotelRoomTypeController::class)->except(['show']);
         Route::resource('hotels.amenities', HotelAmenityController::class)->except(['show']);

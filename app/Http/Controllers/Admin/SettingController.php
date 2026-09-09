@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
+use App\Services\ImageService;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
@@ -26,6 +27,17 @@ class SettingController extends Controller
             'instagram_url' => 'nullable|string|max:255',
             'twitter_url' => 'nullable|string|max:255',
             'youtube_url' => 'nullable|string|max:255',
+
+            // Experience Banner
+            'experience_label' => 'nullable|string|max:100',
+            'experience_title' => 'nullable|string|max:255',
+            'experience_subtitle' => 'nullable|string|max:500',
+            'experience_image' => 'nullable|string|max:500',
+            'experience_image_file' => 'nullable|image|mimes:jpeg,png,jpg,webp,avif|max:8192',
+            'experience_video_url' => 'nullable|string|max:500',
+            'experience_button_text' => 'nullable|string|max:100',
+            'experience_button_link' => 'nullable|string|max:255',
+
             'app_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:4096',
             'app_favicon' => 'nullable|image|mimes:ico,png,jpg,jpeg|max:2048',
         ]);
@@ -40,12 +52,27 @@ class SettingController extends Controller
             'instagram_url',
             'twitter_url',
             'youtube_url',
+            'experience_label',
+            'experience_title',
+            'experience_subtitle',
+            'experience_image',
+            'experience_video_url',
+            'experience_button_text',
+            'experience_button_link',
         ];
 
         foreach ($keys as $key) {
             if ($request->has($key)) {
                 Setting::updateOrCreate(['key' => $key], ['value' => $request->input($key)]);
             }
+        }
+
+        // Handle Experience Image upload
+        if ($request->hasFile('experience_image_file')) {
+            $currentExpImg = Setting::where('key', 'experience_image')->value('value');
+            ImageService::deleteFile($currentExpImg);
+            $newPath = ImageService::uploadAsWebp($request->file('experience_image_file'), 'experience');
+            Setting::updateOrCreate(['key' => 'experience_image'], ['value' => $newPath]);
         }
 
         if ($request->hasFile('app_logo')) {

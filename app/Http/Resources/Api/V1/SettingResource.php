@@ -26,6 +26,15 @@ class SettingResource extends JsonResource
             'instagram_url' => $this['instagram_url'] ?? '',
             'twitter_url' => $this['twitter_url'] ?? '',
             'youtube_url' => $this['youtube_url'] ?? '',
+
+            // Experience Banner
+            'experience_label' => $this['experience_label'] ?? 'The Azura Experience',
+            'experience_title' => $this['experience_title'] ?? 'Where every stay becomes a memory.',
+            'experience_subtitle' => $this['experience_subtitle'] ?? '',
+            'experience_image' => $this['experience_image'] ?? '/images/room2.avif',
+            'experience_video_url' => $this['experience_video_url'] ?? null,
+            'experience_button_text' => $this['experience_button_text'] ?? 'Explore Suites',
+            'experience_button_link' => $this['experience_button_link'] ?? '/rooms',
         ];
     }
 }

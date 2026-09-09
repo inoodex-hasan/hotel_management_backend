@@ -10,8 +10,12 @@ class TestimonialResource extends JsonResource
     public function toArray(Request $request): array
     {
         $avatarUrl = $this->avatar;
-        if (method_exists($this->resource, 'getFirstMediaUrl') && $mediaUrl = $this->resource->getFirstMediaUrl('avatar')) {
+        if (empty($avatarUrl) && method_exists($this->resource, 'getFirstMediaUrl') && $mediaUrl = $this->resource->getFirstMediaUrl('avatar')) {
             $avatarUrl = $mediaUrl;
+        }
+
+        if ($avatarUrl && (str_starts_with($avatarUrl, '/storage/') || str_starts_with($avatarUrl, 'storage/'))) {
+            $avatarUrl = url(ltrim($avatarUrl, '/'));
         }
 
         return [
