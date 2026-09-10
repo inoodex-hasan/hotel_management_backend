@@ -1,20 +1,15 @@
 @extends('admin.layouts.master')
 
-@section('title', isset($isTemporary) && $isTemporary ? 'Temporary Requests' : 'Hotel Bookings')
+@section('title', 'Hotel Bookings')
 
 @section('content')
     <div class="flex flex-wrap items-center justify-between gap-4">
-        <h2 class="text-xl font-semibold uppercase">
-            {{ isset($isTemporary) && $isTemporary ? 'Temporary Requests' : 'Hotel Bookings' }}
-        </h2>
-        <!-- <div class="flex flex-wrap items-center justify-end gap-2">
-            <a href="{{ route('admin.bookings.hotel.create') }}" class="btn btn-primary gap-2">New Booking</a>
-        </div> -->
+        <h2 class="text-xl font-semibold uppercase">Hotel Bookings</h2>
     </div>
 
     <div class="panel mt-6">
         <div class="mb-5 flex w-full flex-col gap-5 md:flex-row md:items-end">
-            <form action="{{ isset($isTemporary) && $isTemporary ? route('admin.bookings.hotel.temporary') : route('admin.bookings.hotel.index') }}" method="GET"
+            <form action="{{ route('admin.bookings.hotel.index') }}" method="GET"
                 class="flex w-full flex-1 flex-col gap-5 md:flex-row md:flex-wrap md:items-end">
                 <div class="form-group w-full md:max-w-md md:min-w-[220px] md:flex-1">
                     <label for="search">Search</label>
@@ -35,7 +30,7 @@
                     <label for="booking-filter-submit" class="pointer-events-none select-none opacity-0" aria-hidden="true">Search</label>
                     <div class="flex flex-wrap gap-2">
                         <button id="booking-filter-submit" type="submit" class="btn btn-primary">Filter</button>
-                        <a href="{{ isset($isTemporary) && $isTemporary ? route('admin.bookings.hotel.temporary') : route('admin.bookings.hotel.index') }}" class="btn btn-outline-primary">Reset</a>
+                        <a href="{{ route('admin.bookings.hotel.index') }}" class="btn btn-outline-primary">Reset</a>
                     </div>
                 </div>
             </form>
@@ -47,7 +42,7 @@
                     <thead>
                         <tr>
                             <th>Ref #</th>
-                            <th>{{ isset($isTemporary) && $isTemporary ? 'Primary Contact' : 'Guest' }}</th>
+                            <th>Guest</th>
                             <th>Hotel / Room</th>
                             <th>Dates</th>
                             <th>Total</th>
@@ -128,13 +123,6 @@
                                                 <span>👁️</span>
                                                 <span>View Details</span>
                                             </a>
-                                            @if($booking->notes === 'Quick booking request' && $booking->status === 'pending')
-                                                <a href="{{ route('admin.bookings.hotel.edit', $booking) }}"
-                                                    class="flex items-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold text-info hover:bg-info/10">
-                                                    <span>✏️</span>
-                                                    <span>Edit Request</span>
-                                                </a>
-                                            @endif
                                             <div class="my-1 border-t border-slate-100 dark:border-white/10"></div>
                                             <form action="{{ route('admin.bookings.hotel.destroy', $booking) }}" method="POST"
                                                 onsubmit="return confirm('Delete this booking?');">

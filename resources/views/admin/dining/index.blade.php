@@ -81,12 +81,12 @@
                                     <div class="flex flex-wrap gap-1 max-w-xs">
                                         @if(is_array($venue->features) && count($venue->features) > 0)
                                             @foreach(array_slice($venue->features, 0, 3) as $feat)
-                                                <span class="badge bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-[10px] px-2 py-0.5 rounded">
+                                                <span class="badge badge-outline-primary text-[11px] px-2 py-0.5 rounded">
                                                     {{ $feat }}
                                                 </span>
                                             @endforeach
                                             @if(count($venue->features) > 3)
-                                                <span class="text-[10px] text-slate-400">+{{ count($venue->features) - 3 }} more</span>
+                                                <span class="text-[10px] text-slate-400 self-center">+{{ count($venue->features) - 3 }} more</span>
                                             @endif
                                         @else
                                             <span class="text-slate-300 text-xs">—</span>

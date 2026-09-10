@@ -78,11 +78,8 @@ Route::middleware(['auth'])->group(function () {
         // Hotel bookings
         Route::prefix('hotel')->name('hotel.')->group(function () {
             Route::get('/', [HotelBookingController::class, 'index'])->name('index');
-            Route::get('/temporary-requests', [HotelBookingController::class, 'temporaryRequests'])->name('temporary');
             Route::get('/create', [HotelBookingController::class, 'create'])->name('create');
             Route::post('/', [HotelBookingController::class, 'store'])->name('store');
-            Route::get('/{booking}/edit', [HotelBookingController::class, 'edit'])->name('edit');
-            Route::put('/{booking}', [HotelBookingController::class, 'update'])->name('update');
             Route::get('/{booking}', [HotelBookingController::class, 'show'])->name('show');
             Route::patch('/{booking}/status', [HotelBookingController::class, 'updateStatus'])->name('status');
             Route::delete('/{booking}', [HotelBookingController::class, 'destroy'])->name('destroy');

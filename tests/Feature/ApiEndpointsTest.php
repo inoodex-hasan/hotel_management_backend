@@ -293,38 +293,6 @@ class ApiEndpointsTest extends TestCase
         $this->assertEquals(4, $this->roomType->fresh()->available_rooms);
     }
 
-    public function test_create_quick_booking(): void
-    {
-        $payload = [
-            'hotel_id' => $this->hotel->id,
-            'room_type_id' => $this->roomType->id,
-            'check_in' => now()->addDays(1)->toDateString(),
-            'check_out' => now()->addDays(2)->toDateString(),
-            'rooms_count' => 1,
-            'adult_guests' => 1,
-            'full_name' => 'Alice Walker',
-            'email' => 'alice@example.com',
-            'phone' => '+8801999888777',
-        ];
-
-        $response = $this->postJson('/api/v1/bookings/quick', $payload);
-
-        $response->assertStatus(201)
-            ->assertJsonStructure([
-                'data' => [
-                    'id',
-                    'reference_no',
-                    'hotel_booking',
-                ],
-            ]);
-
-        $this->assertDatabaseHas('booking_passengers', [
-            'first_name' => 'Alice',
-            'last_name' => 'Walker',
-            'is_lead_passenger' => 1,
-        ]);
-    }
-
     public function test_get_all_bookings_index(): void
     {
         $user = User::create([

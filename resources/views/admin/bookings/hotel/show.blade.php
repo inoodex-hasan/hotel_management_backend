@@ -7,9 +7,6 @@
         <h2 class="text-xl font-semibold uppercase">Booking: <span class="text-primary">{{ $booking->reference_no }}</span></h2>
         <div class="flex flex-wrap items-center justify-end gap-2">
             <a href="{{ route('admin.bookings.hotel.index') }}" class="btn btn-outline-primary">Back to List</a>
-            @if($booking->notes === 'Quick booking request' && $booking->status === 'pending')
-                <a href="{{ route('admin.bookings.hotel.edit', $booking) }}" class="btn btn-primary">Edit Temporary Request</a>
-            @endif
         </div>
     </div>
 

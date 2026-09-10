@@ -71,7 +71,6 @@ Route::prefix('v1')->group(function () {
     Route::prefix('bookings')->group(function () {
         Route::get('/', [BookingController::class, 'index']);
         Route::post('/', [BookingController::class, 'store']);
-        Route::post('/quick', [BookingController::class, 'storeQuick']);
         Route::get('/{reference}', [BookingController::class, 'show']);
     });
 
