@@ -51,6 +51,8 @@ class HotelController extends Controller
 
         Hotel::create($validated);
 
+        clear_api_cache();
+
         return redirect()->route('admin.hotels.index')->with('success', 'Hotel created.');
     }
 
@@ -75,12 +77,16 @@ class HotelController extends Controller
 
         $hotel->update($validated);
 
+        clear_api_cache();
+
         return redirect()->route('admin.hotels.index')->with('success', 'Hotel updated.');
     }
 
     public function destroy(Hotel $hotel): RedirectResponse
     {
         $hotel->delete();
+
+        clear_api_cache();
 
         return redirect()->route('admin.hotels.index')->with('success', 'Hotel removed.');
     }

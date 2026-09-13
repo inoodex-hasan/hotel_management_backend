@@ -103,6 +103,7 @@ class AboutContentController extends Controller
         }
 
         $about->update($validated);
+        clear_api_cache();
 
         return redirect()->back()->with('success', 'About content & page details updated successfully.');
     }

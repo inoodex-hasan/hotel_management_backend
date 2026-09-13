@@ -18,3 +18,15 @@ if (!function_exists('get_setting')) {
         return $setting->value;
     }
 }
+
+if (!function_exists('clear_api_cache')) {
+    function clear_api_cache()
+    {
+        try {
+            \Illuminate\Support\Facades\Cache::flush();
+        } catch (\Throwable $e) {
+            // Fallback silently
+        }
+    }
+}
+

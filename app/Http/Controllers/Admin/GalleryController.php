@@ -70,6 +70,7 @@ class GalleryController extends Controller
         }
 
         GalleryItem::create($validated);
+        clear_api_cache();
 
         return redirect()->route('admin.gallery.index')->with('success', 'Gallery photo added successfully.');
     }
@@ -100,6 +101,7 @@ class GalleryController extends Controller
         }
 
         $gallery->update($validated);
+        clear_api_cache();
 
         return redirect()->route('admin.gallery.index')->with('success', 'Gallery photo updated successfully.');
     }
@@ -107,6 +109,7 @@ class GalleryController extends Controller
     public function toggleStatus(GalleryItem $gallery): RedirectResponse
     {
         $gallery->update(['is_active' => !$gallery->is_active]);
+        clear_api_cache();
         return back()->with('success', 'Gallery item status updated.');
     }
 
@@ -114,6 +117,7 @@ class GalleryController extends Controller
     {
         ImageService::deleteFile($gallery->image);
         $gallery->delete();
+        clear_api_cache();
 
         return redirect()->route('admin.gallery.index')->with('success', 'Gallery photo deleted successfully.');
     }

@@ -63,6 +63,7 @@ class FacilityController extends Controller
         }
 
         Facility::create($validated);
+        clear_api_cache();
 
         return redirect()->route('admin.facilities.index')->with('success', 'Facility created successfully.');
     }
@@ -96,6 +97,7 @@ class FacilityController extends Controller
         }
 
         $facility->update($validated);
+        clear_api_cache();
 
         return redirect()->route('admin.facilities.index')->with('success', 'Facility updated successfully.');
     }
@@ -103,6 +105,7 @@ class FacilityController extends Controller
     public function toggleStatus(Facility $facility): RedirectResponse
     {
         $facility->update(['is_active' => !$facility->is_active]);
+        clear_api_cache();
         return back()->with('success', 'Facility status updated.');
     }
 
@@ -110,6 +113,7 @@ class FacilityController extends Controller
     {
         ImageService::deleteFile($facility->image);
         $facility->delete();
+        clear_api_cache();
 
         return redirect()->route('admin.facilities.index')->with('success', 'Facility deleted successfully.');
     }

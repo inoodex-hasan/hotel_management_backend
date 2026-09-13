@@ -54,6 +54,7 @@ class HeroSlideController extends Controller
         $validated['is_active'] = $request->boolean('is_active');
 
         HeroSlide::create($validated);
+        clear_api_cache();
 
         return redirect()->route('admin.hero-slides.index')->with('success', 'Hero slide created successfully.');
     }
@@ -90,6 +91,7 @@ class HeroSlideController extends Controller
         $validated['is_active'] = $request->boolean('is_active');
 
         $heroSlide->update($validated);
+        clear_api_cache();
 
         return redirect()->route('admin.hero-slides.index')->with('success', 'Hero slide updated successfully.');
     }
@@ -97,6 +99,7 @@ class HeroSlideController extends Controller
     public function destroy(HeroSlide $heroSlide): RedirectResponse
     {
         $heroSlide->delete();
+        clear_api_cache();
         return redirect()->route('admin.hero-slides.index')->with('success', 'Hero slide deleted successfully.');
     }
 }

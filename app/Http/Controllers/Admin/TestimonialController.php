@@ -73,6 +73,7 @@ class TestimonialController extends Controller
         }
 
         Testimonial::create($validated);
+        clear_api_cache();
 
         return redirect()->route('admin.testimonials.index')->with('success', 'Testimonial created successfully.');
     }
@@ -101,6 +102,7 @@ class TestimonialController extends Controller
         }
 
         $testimonial->update($validated);
+        clear_api_cache();
 
         return redirect()->route('admin.testimonials.index')->with('success', 'Testimonial updated successfully.');
     }
@@ -108,6 +110,7 @@ class TestimonialController extends Controller
     public function toggleApproval(Testimonial $testimonial): RedirectResponse
     {
         $testimonial->update(['is_approved' => !$testimonial->is_approved]);
+        clear_api_cache();
         return back()->with('success', 'Testimonial status updated.');
     }
 
@@ -115,6 +118,7 @@ class TestimonialController extends Controller
     {
         ImageService::deleteFile($testimonial->avatar);
         $testimonial->delete();
+        clear_api_cache();
 
         return redirect()->route('admin.testimonials.index')->with('success', 'Testimonial deleted successfully.');
     }

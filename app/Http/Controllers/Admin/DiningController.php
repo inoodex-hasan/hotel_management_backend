@@ -67,6 +67,7 @@ class DiningController extends Controller
         }
 
         Dining::create($validated);
+        clear_api_cache();
 
         return redirect()->route('admin.dining.index')->with('success', 'Dining venue created successfully.');
     }
@@ -101,6 +102,7 @@ class DiningController extends Controller
         }
 
         $dining->update($validated);
+        clear_api_cache();
 
         return redirect()->route('admin.dining.index')->with('success', 'Dining venue updated successfully.');
     }
@@ -108,6 +110,7 @@ class DiningController extends Controller
     public function toggleStatus(Dining $dining): RedirectResponse
     {
         $dining->update(['is_active' => !$dining->is_active]);
+        clear_api_cache();
         return back()->with('success', 'Dining venue status updated.');
     }
 
@@ -115,6 +118,7 @@ class DiningController extends Controller
     {
         ImageService::deleteFile($dining->image);
         $dining->delete();
+        clear_api_cache();
 
         return redirect()->route('admin.dining.index')->with('success', 'Dining venue deleted successfully.');
     }

@@ -9,6 +9,8 @@ use App\Models\Hotel;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Cache;
+
 class AboutController extends Controller
 {
     /**
@@ -16,14 +18,19 @@ class AboutController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
-        $hotelId = null;
-        if ($request->filled('hotel_slug')) {
-            $hotel = Hotel::where('slug', $request->hotel_slug)->first();
-            $hotelId = $hotel?->id;
-        }
+        $hotelSlug = $request->get('hotel_slug', 'default');
+        $cacheKey = "api.about.{$hotelSlug}";
 
-        $about = AboutContent::where('hotel_id', $hotelId)->first()
-            ?? AboutContent::first();
+        $about = Cache::remember($cacheKey, 3600, function () use ($request) {
+            $hotelId = null;
+            if ($request->filled('hotel_slug')) {
+                $hotel = Hotel::where('slug', $request->hotel_slug)->first();
+                $hotelId = $hotel?->id;
+            }
+
+            return AboutContent::where('hotel_id', $hotelId)->first()
+                ?? AboutContent::first();
+        });
 
         if (!$about) {
             return response()->json(['data' => null]);

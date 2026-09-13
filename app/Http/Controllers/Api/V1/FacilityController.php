@@ -8,17 +8,24 @@ use App\Models\Facility;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
+use Illuminate\Support\Facades\Cache;
+
 class FacilityController extends Controller
 {
     public function index(Request $request): AnonymousResourceCollection
     {
-        $query = Facility::query()->where('is_active', true);
+        $hotelId = $request->get('hotel_id', 'all');
+        $cacheKey = "api.facilities.{$hotelId}";
 
-        if ($request->filled('hotel_id')) {
-            $query->where('hotel_id', $request->hotel_id);
-        }
+        $facilities = Cache::remember($cacheKey, 3600, function () use ($request) {
+            $query = Facility::query()->where('is_active', true);
 
-        $facilities = $query->orderBy('sort_order')->get();
+            if ($request->filled('hotel_id')) {
+                $query->where('hotel_id', $request->hotel_id);
+            }
+
+            return $query->orderBy('sort_order')->get();
+        });
 
         return FacilityResource::collection($facilities);
     }

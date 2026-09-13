@@ -95,6 +95,8 @@ class SettingController extends Controller
             $faviconSetting->save();
         }
 
+        clear_api_cache();
+
         return redirect()->back()->with('success', 'Settings updated successfully.');
     }
 }

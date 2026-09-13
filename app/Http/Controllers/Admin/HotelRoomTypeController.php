@@ -70,6 +70,8 @@ class HotelRoomTypeController extends Controller
             }
         }
 
+        clear_api_cache();
+
         return redirect()->route('admin.hotels.room-types.index', $hotel)->with('success', 'Room type created successfully.');
     }
 
@@ -153,6 +155,8 @@ class HotelRoomTypeController extends Controller
 
         $roomType->update($validated);
 
+        clear_api_cache();
+
         return redirect()->route('admin.hotels.room-types.index', $hotel)->with('success', 'Room type updated successfully.');
     }
 
@@ -161,6 +165,8 @@ class HotelRoomTypeController extends Controller
         abort_unless($roomType->hotel_id === $hotel->id, 404);
 
         $roomType->delete();
+
+        clear_api_cache();
 
         return redirect()->route('admin.hotels.room-types.index', $hotel)->with('success', 'Room type deleted.');
     }

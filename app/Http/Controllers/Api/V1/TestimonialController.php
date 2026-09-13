@@ -8,21 +8,29 @@ use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
+use Illuminate\Support\Facades\Cache;
+
 class TestimonialController extends Controller
 {
     public function index(Request $request): AnonymousResourceCollection
     {
-        $query = Testimonial::query()->where('is_approved', true);
+        $hotelId = $request->get('hotel_id', 'all');
+        $featured = $request->boolean('featured_only') ? '1' : '0';
+        $cacheKey = "api.testimonials.{$hotelId}.{$featured}";
 
-        if ($request->filled('hotel_id')) {
-            $query->where('hotel_id', $request->hotel_id);
-        }
+        $testimonials = Cache::remember($cacheKey, 3600, function () use ($request) {
+            $query = Testimonial::query()->where('is_approved', true);
 
-        if ($request->boolean('featured_only')) {
-            $query->where('is_featured', true);
-        }
+            if ($request->filled('hotel_id')) {
+                $query->where('hotel_id', $request->hotel_id);
+            }
 
-        $testimonials = $query->latest()->get();
+            if ($request->boolean('featured_only')) {
+                $query->where('is_featured', true);
+            }
+
+            return $query->latest()->get();
+        });
 
         return TestimonialResource::collection($testimonials);
     }
