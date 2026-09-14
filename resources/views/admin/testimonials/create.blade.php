@@ -12,7 +12,7 @@
             </ul>
             <h2 class="text-xl font-semibold uppercase">Add New Guest Review</h2>
         </div>
-        <a href="{{ route('admin.testimonials.index') }}" class="btn btn-outline-secondary btn-sm">
+        <a href="{{ route('admin.testimonials.index') }}" class="btn btn-outline-secondary">
             &larr; Back to Testimonials
         </a>
     </div>

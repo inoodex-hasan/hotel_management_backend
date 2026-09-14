@@ -3,9 +3,12 @@
 @section('title', 'Add Policy — '.$hotel->name)
 
 @section('content')
-    <div>
-        <h2 class="text-xl font-semibold uppercase">Add Hotel Policy</h2>
-        <p class="text-sm text-white-dark">{{ $hotel->name }}</p>
+    <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+            <h2 class="text-xl font-semibold uppercase">Add Hotel Policy</h2>
+            <p class="text-sm text-white-dark">{{ $hotel->name }}</p>
+        </div>
+        <a href="{{ route('admin.hotels.policies.index', $hotel) }}" class="btn btn-outline-secondary">&larr; Back to Policies</a>
     </div>
 
     <div class="panel mt-6">

@@ -3,9 +3,12 @@
 @section('title', 'Upload Photo — '.$hotel->name)
 
 @section('content')
-    <div>
-        <h2 class="text-xl font-semibold uppercase">Upload Photo</h2>
-        <p class="text-sm text-white-dark">{{ $hotel->name }}</p>
+    <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+            <h2 class="text-xl font-semibold uppercase">Upload Photo</h2>
+            <p class="text-sm text-white-dark">{{ $hotel->name }}</p>
+        </div>
+        <a href="{{ route('admin.hotels.photos.index', $hotel) }}" class="btn btn-outline-secondary">&larr; Back to Photos</a>
     </div>
 
     <div class="panel mt-6">

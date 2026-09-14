@@ -9,7 +9,7 @@
             <p class="text-xs text-slate-400 mt-1">Received on {{ $inquiry->created_at->format('F d, Y \a\t H:i') }}</p>
         </div>
         <div class="flex items-center gap-2">
-            <a href="{{ route('admin.inquiries.index') }}" class="btn btn-outline-primary">Back to Inquiries</a>
+            <a href="{{ route('admin.inquiries.index') }}" class="btn btn-outline-secondary">&larr; Back to Inquiries</a>
             <form action="{{ route('admin.inquiries.toggle-read', $inquiry) }}" method="POST">
                 @csrf
                 @method('PATCH')

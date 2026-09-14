@@ -6,7 +6,7 @@
     <div class="flex flex-wrap items-center justify-between gap-4">
         <h2 class="text-xl font-semibold uppercase">Booking: <span class="text-primary">{{ $booking->reference_no }}</span></h2>
         <div class="flex flex-wrap items-center justify-end gap-2">
-            <a href="{{ route('admin.bookings.hotel.index') }}" class="btn btn-outline-primary">Back to List</a>
+            <a href="{{ route('admin.bookings.hotel.index') }}" class="btn btn-outline-secondary">&larr; Back to Bookings</a>
         </div>
     </div>
 

@@ -5,7 +5,7 @@
 @section('content')
     <div class="flex flex-wrap items-center justify-between gap-4">
         <h2 class="text-xl font-semibold uppercase">New hotel</h2>
-        <a href="{{ route('admin.hotels.index') }}" class="btn btn-secondary gap-2">Back</a>
+        <a href="{{ route('admin.hotels.index') }}" class="btn btn-outline-secondary">&larr; Back to Hotels</a>
     </div>
 
     <div class="panel mt-6">

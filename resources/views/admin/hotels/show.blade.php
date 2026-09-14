@@ -6,7 +6,7 @@
     <div class="flex flex-wrap items-center justify-between gap-4">
         <h2 class="text-xl font-semibold">{{ $hotel->name }}</h2>
         <div class="flex flex-wrap gap-2">
-            <a href="{{ route('admin.hotels.index') }}" class="btn btn-secondary">Back</a>
+            <a href="{{ route('admin.hotels.index') }}" class="btn btn-outline-secondary">&larr; Back to Hotels</a>
             <a href="{{ route('admin.hotels.edit', $hotel) }}" class="btn btn-primary">Edit</a>
             <a href="{{ route('admin.hotels.room-types.index', $hotel) }}" class="btn btn-outline-info">Room Types</a>
             <a href="{{ route('admin.hotels.amenities.index', $hotel) }}" class="btn btn-outline-success">Amenities</a>

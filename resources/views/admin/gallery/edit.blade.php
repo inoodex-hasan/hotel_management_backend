@@ -12,7 +12,7 @@
             </ul>
             <h2 class="text-xl font-semibold uppercase">Edit Gallery Photo</h2>
         </div>
-        <a href="{{ route('admin.gallery.index') }}" class="btn btn-outline-secondary btn-sm">
+        <a href="{{ route('admin.gallery.index') }}" class="btn btn-outline-secondary">
             &larr; Back to Gallery
         </a>
     </div>

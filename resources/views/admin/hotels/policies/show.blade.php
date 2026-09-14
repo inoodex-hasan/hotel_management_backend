@@ -9,7 +9,7 @@
             <p class="text-sm text-white-dark">{{ $hotel->name }}</p>
         </div>
         <div class="flex flex-wrap gap-2">
-            <a href="{{ route('admin.hotels.policies.index', $hotel) }}" class="btn btn-secondary">Back to Policies</a>
+            <a href="{{ route('admin.hotels.policies.index', $hotel) }}" class="btn btn-outline-secondary">&larr; Back to Policies</a>
             <a href="{{ route('admin.hotels.policies.edit', [$hotel, $policy]) }}" class="btn btn-primary">Edit Policy</a>
         </div>
     </div>

@@ -3,9 +3,12 @@
 @section('title', 'Add Amenity — '.$hotel->name)
 
 @section('content')
-    <div>
-        <h2 class="text-xl font-semibold uppercase">Add Amenity</h2>
-        <p class="text-sm text-white-dark">{{ $hotel->name }}</p>
+    <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+            <h2 class="text-xl font-semibold uppercase">Add Amenity</h2>
+            <p class="text-sm text-white-dark">{{ $hotel->name }}</p>
+        </div>
+        <a href="{{ route('admin.hotels.amenities.index', $hotel) }}" class="btn btn-outline-secondary">&larr; Back to Amenities</a>
     </div>
 
     <div class="panel mt-6">
